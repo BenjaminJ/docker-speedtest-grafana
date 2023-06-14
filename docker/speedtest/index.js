@@ -17,7 +17,7 @@ const log = (message, severity = "Info") =>
 const getSpeedMetrics = async () => {
   const args = (process.env.SPEEDTEST_SERVER) ?
     [ "--accept-license", "--accept-gdpr", "-f", "--json", "--server-id=" + process.env.SPEEDTEST_SERVER] :
-    [ "--accept-license", "--accept-gdpr", "-f", "--json" ];
+    [ "--json" ];
 
   const { stdout } = await execa("speedtest", args);
   const result = JSON.parse(stdout);
