@@ -4,7 +4,7 @@ RUN apt-get update && apt-get install -y curl gnupg1 apt-transport-https dirmngr
 RUN curl -s https://packagecloud.io/install/repositories/ookla/speedtest-cli/script.deb.sh | bash
 RUN apt-get install -y speedtest-cli
 
-FROM node:18-alpine as install-dependencies
+FROM alpine as install-dependencies
 RUN apk add --no-cache npm
 WORKDIR /build
 COPY . .
