@@ -24,8 +24,6 @@ RUN apk update && apk upgrade && \
 
 RUN npm install --production
 
-RUN apk del .build-deps
-
 COPY index.js .
 
 ENV INFLUXDB_HOST=influxdb
