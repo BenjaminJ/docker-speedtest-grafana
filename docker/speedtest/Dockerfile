@@ -1,9 +1,17 @@
 FROM debian:10-slim AS get-speedtest
 
-RUN apt-get update && apt-get install gnupg1 apt-transport-https dirmngr lsb-release -y
-RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 379CE192D401AB61
-RUN echo "deb https://ookla.bintray.com/debian $(lsb_release -sc) main" | tee  /etc/apt/sources.list.d/speedtest.list
-RUN apt-get update
+#RUN apt-get update && apt-get install gnupg1 apt-transport-https dirmngr lsb-release -y
+#RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 379CE192D401AB61
+#RUN echo "deb https://ookla.bintray.com/debian $(lsb_release -sc) main" | tee  /etc/apt/sources.list.d/speedtest.list
+#RUN apt-get update
+#RUN apt-get install speedtest
+
+RUN apt-get update -y
+## Other non-official binaries will conflict with Speedtest CLI
+# Example how to remove using apt-get
+RUN apt-get remove speedtest-cli
+RUN apt-get install curl -y
+RUN curl -s https://packagecloud.io/install/repositories/ookla/speedtest-cli/script.deb.sh | bash
 RUN apt-get install speedtest
 
 FROM alpine as install-dependencies
